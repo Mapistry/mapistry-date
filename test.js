@@ -347,5 +347,21 @@ describe('time library', function() {
       var d = new Date(m.format());
       expect(MapistryTime.getShortMonthName(d)).to.be('Sep');
     })
-  })
+  });
+
+  describe('getTwoCharDate', function() {
+    it ('returns same week as moment would', function() {
+      var m = moment().month(5).date(21).year(2017);
+      var d = new Date(m.format());
+      expect(MapistryTime.getTwoCharDate(d)).to.be(m.format('DD'));
+    });
+  });
+
+  describe('getTwoCharMonth', function() {
+    it ('returns same week as moment would', function() {
+      var m = moment().month(5).date(21).year(2017);
+      var d = new Date(m.format());
+      expect(MapistryTime.getTwoCharMonth(d)).to.be(m.format('MM'));
+    });
+  });
 });

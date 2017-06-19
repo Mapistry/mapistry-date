@@ -222,8 +222,24 @@ var Date = {
     return this.getMonthName(d).substr(0, 3);
   },
 
+
   getQuarter: function(d) {
     return Math.floor(d.getMonth()/3) + 1;
+  },
+
+  _addZeroAtFront: function(n) {
+    if (n < 10) {
+      return '0' + n;
+    }
+    return n.toString();
+  },
+
+  getTwoCharDate: function(d) {
+    return this._addZeroAtFront(d.getDate());
+  },
+
+  getTwoCharMonth: function(d) {
+    return this._addZeroAtFront(d.getMonth() + 1);
   }
 };
 
