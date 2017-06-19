@@ -1,0 +1,25 @@
+{
+  "name": "mapistry-date",
+  "version": "0.0.0",
+  "description": "Date functions for times where Moment is too slow.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mapistry/mapistry-dategit"
+  },
+  "author": "allie@mapistry.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mapistry/mapistry-date/issues"
+  },
+  "homepage": "https://github.com/Mapistry/mapistry-date#readme",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.3.2",
+    "expect.js": "0.3.x",
+    "moment": "^2.10.x"
+  }
+}
