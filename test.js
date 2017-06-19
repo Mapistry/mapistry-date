@@ -347,5 +347,13 @@ describe('time library', function() {
       var d = new Date(m.format());
       expect(MapistryTime.getTwoCharDate(d)).to.be(m.format('DD'));
     });
+  });
+
+  describe('getShortMonthName', function() {
+    it('returns Sep for date in September', function() {
+      var m = moment().month(8).date(21).year(2017);
+      var d = new Date(m.format());
+      expect(MapistryTime.getShortMonthName(d)).to.be('Sep');
+    })
   })
 });

@@ -219,7 +219,7 @@ var Date = {
   },
 
   getShortMonthName: function(d) {
-    this.getMonthName(d).substr(0, 3);
+    return this.getMonthName(d).substr(0, 3);
   },
 
 
