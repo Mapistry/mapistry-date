@@ -364,4 +364,35 @@ describe('time library', function() {
       expect(MapistryTime.getTwoCharMonth(d)).to.be(m.format('MM'));
     });
   });
+
+  describe('isBeforeDay returns same as moment would', function() {
+    it ('days a few apart, d1 < d2', function() {
+      var m1 = moment().month(5).date(21).year(2017);
+      var m2 = moment().month(5).date(26).year(2017);
+      var d1 = new Date(m1.format());
+      var d2 = new Date(m2.format());
+      expect(MapistryTime.isBeforeDay(d1,d2)).to.be(m1.isBefore(d2, 'day'));
+    });
+    it ('days a few apart, d1 > d2', function() {
+      var m1 = moment().month(5).date(21).year(2017);
+      var m2 = moment().month(5).date(4).year(2017);
+      var d1 = new Date(m1.format());
+      var d2 = new Date(m2.format());
+      expect(MapistryTime.isBeforeDay(d1,d2)).to.be(m1.isBefore(d2, 'day'));
+    });
+    it ('days years apart', function() {
+      var m1 = moment().month(5).date(21).year(2013);
+      var m2 = moment().month(5).date(4).year(2017);
+      var d1 = new Date(m1.format());
+      var d2 = new Date(m2.format());
+      expect(MapistryTime.isBeforeDay(d1,d2)).to.be(m1.isBefore(d2, 'day'));
+    });
+    it ('days same, different times', function() {
+      var m1 = moment().month(5).date(21).year(2017).hour(12);
+      var m2 = moment().month(5).date(21).year(2017).hour(10);
+      var d1 = new Date(m1.format());
+      var d2 = new Date(m2.format());
+      expect(MapistryTime.isBeforeDay(d1,d2)).to.be(m1.isBefore(d2, 'day'));
+    });
+  })
 });

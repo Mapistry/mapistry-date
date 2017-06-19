@@ -240,6 +240,13 @@ var Date = {
 
   getTwoCharMonth: function(d) {
     return this._addZeroAtFront(d.getMonth() + 1);
+  },
+
+  isBeforeDay: function(d1, d2) {
+    var y1 = d1.getFullYear();
+    var y2 = d2.getFullYear();
+    if (y1 !== y2) return y1 < y2;
+    return this.getDayOfYear(d1) < this.getDayOfYear(d2);
   }
 };
 
