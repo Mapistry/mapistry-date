@@ -222,17 +222,8 @@ var Date = {
     return this.getMonthName(d).substr(0, 3);
   },
 
-
   getQuarter: function(d) {
     return Math.floor(d.getMonth()/3) + 1;
-  },
-
-  getTwoCharDate: function(d) {
-    var date = d.getDate();
-    if (date < 10) {
-      return ' ' + date;
-    }
-    return date.toString();
   }
 };
 
