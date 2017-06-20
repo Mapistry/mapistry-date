@@ -91,6 +91,10 @@ var Date = {
   },
 
   addMonths: function(d, numMonths){
+    if (numMonths > 11) {
+      throw new Error('Only implemented to add 11 months!');
+    }
+
     var month = d.getMonth();
     if (month + numMonths < 12) {
       d.setMonth(month + numMonths);
