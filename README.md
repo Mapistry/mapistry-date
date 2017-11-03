@@ -2,3 +2,5 @@
 
 # mapistry-date
 A collection of somewhat random functions for manipulating javascript Dates. Built for use where Moment could not be used for performance reasons.
+
+# DEPRECATED. Please make any new changes to https://github.com/Mapistry/mapistry-shared
