@@ -1,17 +1,11 @@
 var Date = {
   startOfDay: function(d) {
-    d.setHours(0);
-    d.setMinutes(0);
-    d.setSeconds(0);
-    d.setMilliseconds(0);
+    d.setUTCHours(0, 0, 0, 0);
     return d;
   },
 
   endOfDay: function(d) {
-    d.setHours(23);
-    d.setMinutes(59);
-    d.setSeconds(59);
-    d.setMilliseconds(999);
+    d.setUTCHours(23, 59, 59, 999);
     return d;
   },
 
@@ -27,66 +21,66 @@ var Date = {
   },
 
   startOfWeek: function(d) {
-    var dayOfWeek = d.getDay();
-    var dayInMonth = d.getDate();
+    var dayOfWeek = d.getUTCDay();
+    var dayInMonth = d.getUTCDate();
 
     if (dayOfWeek >= dayInMonth) {
-      d.setDate(dayInMonth - dayOfWeek);
+      d.setUTCDate(dayInMonth - dayOfWeek);
       return this.startOfDay(d);
     }
-    var month = d.getMonth();
-    var year = d.getFullYear();
+    var month = d.getUTCMonth();
+    var year = d.getUTCFullYear();
     if (month > 0) {
-      d.setMonth(month - 1);
+      d.setUTCMonth(month - 1);
     } else {
-      d.setMonth(11);
-      d.setFullYear(year - 1);
+      d.setUTCMonth(11);
+      d.setUTCFullYear(year - 1);
     }
-    var daysInMonth = this.getDaysInMonth(d.getMonth(), year);
-    d.setDate(daysInMonth + dayInMonth - dayOfWeek);
+    var daysInMonth = this.getDaysInMonth(d.getUTCMonth(), year);
+    d.setUTCDate(daysInMonth + dayInMonth - dayOfWeek);
     return this.startOfDay(d);
 
   },
 
   endOfWeek: function(d) {
-    var dayOfWeek = d.getDay();
-    var dayInMonth = d.getDate();
-    var year = d.getFullYear();
-    var month = d.getMonth();
-    var daysInMonth = this.getDaysInMonth(d.getMonth(), year);
+    var dayOfWeek = d.getUTCDay();
+    var dayInMonth = d.getUTCDate();
+    var year = d.getUTCFullYear();
+    var month = d.getUTCMonth();
+    var daysInMonth = this.getDaysInMonth(d.getUTCMonth(), year);
 
     if (dayInMonth + 6 - dayOfWeek <= daysInMonth) {
-      d.setDate(dayInMonth + 6 - dayOfWeek);
+      d.setUTCDate(dayInMonth + 6 - dayOfWeek);
       return this.endOfDay(d);
     }
 
     if (month < 11) {
-      d.setMonth(month + 1);
+      d.setUTCMonth(month + 1);
     } else {
-      d.setMonth(0);
-      d.setFullYear(year + 1);
+      d.setUTCMonth(0);
+      d.setUTCFullYear(year + 1);
     }
-    d.setDate(dayInMonth + 6 - dayOfWeek - daysInMonth);
+    d.setUTCDate(dayInMonth + 6 - dayOfWeek - daysInMonth);
     return this.endOfDay(d);
   },
 
   startOfMonth: function(d) {
-    d.setDate(1);
+    d.setUTCDate(1);
     return this.startOfDay(d);
   },
 
   endOfMonth: function(d) {
-    d.setDate(this.getDaysInMonth(d.getMonth(), d.getYear()));
+    d.setUTCDate(this.getDaysInMonth(d.getUTCMonth(), d.getUTCFullYear()));
     return this.endOfDay(d);
   },
 
   startOfQuarter: function(d) {
-    d.setMonth(Math.floor(d.getMonth()/3) * 3);
+    d.setUTCMonth(Math.floor(d.getUTCMonth()/3) * 3);
     return this.startOfMonth(d);
   },
 
   endOfQuarter: function(d) {
-    d.setMonth(Math.floor(d.getMonth()/3) * 3 + 2);
+    d.setUTCMonth(Math.floor(d.getUTCMonth()/3) * 3 + 2);
     return this.endOfMonth(d);
   },
 
@@ -95,14 +89,14 @@ var Date = {
       throw new Error('Only implemented to add 11 months!');
     }
 
-    var month = d.getMonth();
+    var month = d.getUTCMonth();
     if (month + numMonths < 12) {
-      d.setMonth(month + numMonths);
+      d.setUTCMonth(month + numMonths);
       return d;
     }
 
-    d.setFullYear(d.getFullYear() + 1);
-    d.setMonth(month + numMonths - 12);
+    d.setUTCFullYear(d.getUTCFullYear() + 1);
+    d.setUTCMonth(month + numMonths - 12);
     return d;
   },
 
@@ -111,22 +105,22 @@ var Date = {
       throw new Error('Only implemented to add less than one month of days!');
     }
 
-    var dayOfMonth = d.getDate();
-    var month = d.getMonth();
-    var year = d.getFullYear();
+    var dayOfMonth = d.getUTCDate();
+    var month = d.getUTCMonth();
+    var year = d.getUTCFullYear();
     var daysInMonth = this.getDaysInMonth(month, year);
     if (dayOfMonth + daysToAdd <= daysInMonth) {
-      d.setDate(dayOfMonth + daysToAdd);
+      d.setUTCDate(dayOfMonth + daysToAdd);
       return d;
     }
 
     if (month < 11) {
-      d.setMonth(month + 1);
+      d.setUTCMonth(month + 1);
     } else {
-      d.setMonth(0);
-      d.setFullYear(year + 1);
+      d.setUTCMonth(0);
+      d.setUTCFullYear(year + 1);
     }
-    d.setDate(dayOfMonth + daysToAdd - daysInMonth);
+    d.setUTCDate(dayOfMonth + daysToAdd - daysInMonth);
     return d;
   },
 
@@ -135,27 +129,27 @@ var Date = {
       throw new Error('Only implemented to subtract less than one month of days!');
     }
 
-    var dayOfMonth = d.getDate();
-    var month = d.getMonth();
-    var year = d.getFullYear();
+    var dayOfMonth = d.getUTCDate();
+    var month = d.getUTCMonth();
+    var year = d.getUTCFullYear();
     var daysInMonth = this.getDaysInMonth(month, year);
     if (dayOfMonth - daysToSubtract >= 0) {
-      d.setDate(dayOfMonth - daysToSubtract);
+      d.setUTCDate(dayOfMonth - daysToSubtract);
       return d;
     }
 
     if (month > 0) {
-      d.setMonth(month - 1);
+      d.setUTCMonth(month - 1);
     } else {
-      d.setMonth(11);
-      d.setFullYear(year - 1);
+      d.setUTCMonth(11);
+      d.setUTCFullYear(year - 1);
     }
-    d.setDate(dayOfMonth - daysToSubtract + daysInMonth);
+    d.setUTCDate(dayOfMonth - daysToSubtract + daysInMonth);
     return d;
   },
 
   isSameDay: function(d1, d2) {
-    return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
+    return d1.getUTCFullYear() === d2.getUTCFullYear() && d1.getUTCMonth() === d2.getUTCMonth() && d1.getUTCDate() === d2.getUTCDate();
   },
 
   isBetween: function(x, d1, d2) {
@@ -163,7 +157,7 @@ var Date = {
   },
 
   dayOfWeek: function(d, dayOfWeek) {
-    var currentDayOfWeek = d.getDay();
+    var currentDayOfWeek = d.getUTCDay();
 
     if (currentDayOfWeek < dayOfWeek) {
       return this.addLessThan29Days(d, dayOfWeek - currentDayOfWeek);
@@ -174,7 +168,7 @@ var Date = {
   },
 
   getMonthName: function(d) {
-    var month = d.getMonth();
+    var month = d.getUTCMonth();
     switch(month) {
       case 0:
         return 'January';
@@ -204,13 +198,13 @@ var Date = {
   },
 
   getDayOfYear: function(d){
-    var month = d.getMonth();
+    var month = d.getUTCMonth();
     var i = 0;
     var dayOfYear = 0;
     while (i < month) {
       dayOfYear += this.getDaysInMonth(i++);
     }
-    return dayOfYear + d.getDate();
+    return dayOfYear + d.getUTCDate();
   },
 
   getWeekOfYear: function(d){
@@ -228,7 +222,7 @@ var Date = {
 
 
   getQuarter: function(d) {
-    return Math.floor(d.getMonth()/3) + 1;
+    return Math.floor(d.getUTCMonth()/3) + 1;
   },
 
   _addZeroAtFront: function(n) {
@@ -239,16 +233,16 @@ var Date = {
   },
 
   getTwoCharDate: function(d) {
-    return this._addZeroAtFront(d.getDate());
+    return this._addZeroAtFront(d.getUTCDate());
   },
 
   getTwoCharMonth: function(d) {
-    return this._addZeroAtFront(d.getMonth() + 1);
+    return this._addZeroAtFront(d.getUTCMonth() + 1);
   },
 
   isBeforeDay: function(d1, d2) {
-    var y1 = d1.getFullYear();
-    var y2 = d2.getFullYear();
+    var y1 = d1.getUTCFullYear();
+    var y2 = d2.getUTCFullYear();
     if (y1 !== y2) return y1 < y2;
     return this.getDayOfYear(d1) < this.getDayOfYear(d2);
   }
