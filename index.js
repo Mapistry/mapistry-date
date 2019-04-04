@@ -115,6 +115,7 @@ var Date = {
     }
 
     if (month < 11) {
+      d.setUTCDate(1);
       d.setUTCMonth(month + 1);
     } else {
       d.setUTCMonth(0);
